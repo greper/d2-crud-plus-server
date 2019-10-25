@@ -1,0 +1,19 @@
+server:
+  port: 7070
+  servlet:
+    context-path: /api
+uploader:
+  qiniu:
+    accessKey: 你的七牛accessKey
+    secretKey: 你的七牛secretKey
+    bucket: d2p-demo
+  cos:
+    secretId: 你的Cos secretId
+    secretKey: 你的Cos secretKey
+    bucket: d2p-demo-1251260344
+  alioss:
+    accessKey: 你的阿里云 accessKey
+    accessKeySecret: 你的阿里云 accessKeySecret
+    bucket: d2p-demo
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+    roleArn: "acs:ram::1831228848739566:role/ramosstemp"

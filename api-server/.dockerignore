@@ -1,0 +1,7 @@
+logs
+src
+target
+*.*
+!target/*.jar
+!target/*.war
+

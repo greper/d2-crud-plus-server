@@ -1,0 +1,39 @@
+package com.veryreader.d2p.api.config;
+
+import com.veryreader.d2p.api.web.interceptor.GlobalExceptionResolver;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
+
+/**
+ * @author xiaojunnuo
+ */
+@Configuration("ApiWebConfig" )
+@Primary
+@Slf4j
+public class WebConfiguration implements WebMvcConfigurer {
+
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
+    }
+
+    @Override
+    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
+        exceptionResolvers.add(getGlobalExceptionResolver());
+    }
+
+
+    @Bean
+    GlobalExceptionResolver getGlobalExceptionResolver() {
+        return new GlobalExceptionResolver();
+    }
+
+}
