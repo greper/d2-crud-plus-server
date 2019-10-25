@@ -12,6 +12,7 @@
     <artifactId>api-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>api-server</name>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
     <properties>

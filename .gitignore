@@ -29,4 +29,4 @@ build/
 
 ### VS Code ###
 .vscode/
-src/**/application-xiao.yaml
+api-server/src/**/application-xiao.yaml
