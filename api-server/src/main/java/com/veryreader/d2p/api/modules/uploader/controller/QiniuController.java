@@ -1,7 +1,7 @@
-package com.veryreader.d2p.api.controller.upload;
+package com.veryreader.d2p.api.modules.uploader.controller;
 
 import com.qiniu.util.Auth;
-import com.veryreader.d2p.api.config.upload.QiniuUploaderConfig;
+import com.veryreader.d2p.api.modules.uploader.config.QiniuUploaderConfig;
 import com.veryreader.d2p.api.model.vo.Ret;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

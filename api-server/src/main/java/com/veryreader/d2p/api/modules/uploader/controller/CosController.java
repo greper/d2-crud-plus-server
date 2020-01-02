@@ -1,9 +1,9 @@
-package com.veryreader.d2p.api.controller.upload;
+package com.veryreader.d2p.api.modules.uploader.controller;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.http.HttpMethodName;
 import com.tencent.cloud.CosStsClient;
-import com.veryreader.d2p.api.config.upload.CosUploaderConfig;
+import com.veryreader.d2p.api.modules.uploader.config.CosUploaderConfig;
 import com.veryreader.d2p.api.model.vo.Ret;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

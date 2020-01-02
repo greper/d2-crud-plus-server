@@ -21,7 +21,8 @@
     </properties>
 
     <modules>
-    <module>api-server</module>
+        <module>api-server</module>
+        <module>code-generator</module>
     </modules>
 
     <build>

@@ -1,4 +1,4 @@
-package com.veryreader.d2p.api.controller.upload;
+package com.veryreader.d2p.api.modules.uploader.controller;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
@@ -7,7 +7,7 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.veryreader.d2p.api.config.upload.AliossUploaderConfig;
+import com.veryreader.d2p.api.modules.uploader.config.AliossUploaderConfig;
 import com.veryreader.d2p.api.model.vo.Ret;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleRequest;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleResponse;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.Date;
 

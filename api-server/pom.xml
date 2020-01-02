@@ -6,7 +6,6 @@
         <groupId>com.veryreader.d2p</groupId>
         <artifactId>d2p-server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../</relativePath>
     </parent>
     <groupId>com.veryreader.d2p</groupId>
     <artifactId>api-server</artifactId>

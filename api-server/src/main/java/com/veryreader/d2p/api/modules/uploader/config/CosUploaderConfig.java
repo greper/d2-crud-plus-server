@@ -1,4 +1,4 @@
-package com.veryreader.d2p.api.config.upload;
+package com.veryreader.d2p.api.modules.uploader.config;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
