@@ -2,6 +2,15 @@ server:
   port: 7070
   servlet:
     context-path: /api
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/d2p_pm?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    hikari:
+      auto-commit: false
 uploader:
   qiniu:
     accessKey: 你的七牛accessKey
@@ -17,3 +26,4 @@ uploader:
     bucket: d2p-demo
     endpoint: oss-cn-shenzhen.aliyuncs.com
     roleArn: "acs:ram::1831228848739566:role/ramosstemp"
+

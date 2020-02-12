@@ -67,6 +67,7 @@ public class GenerateServiceImpl implements GenerateService {
                 .setMapper("templates/backend/mapper.java")
                 .setService("templates/backend/service.java")
                 .setServiceImpl("templates/backend/serviceImpl.java")
+                .setXml("templates/backend/mapper.xml")
                 ;
 
 
@@ -119,7 +120,6 @@ public class GenerateServiceImpl implements GenerateService {
         // templateConfig.setService();
         // templateConfig.setController();
 
-        templateConfig.setXml(null);
         generator.setTemplate(templateConfig);
 
         // 策略配置

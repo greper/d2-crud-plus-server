@@ -5,22 +5,28 @@ import com.veryreader.d2p.generator.services.GenerateService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 class CodeGeneratorApplicationTests {
 
     @Autowired
     private GenerateService generateService;
+
     @Test
-    void generate() {
+    void pm() {
         GenerateRequest request = GenerateRequest.builder()
-                .moduleName("hotel")
-                .tableName("check_in")
-                .parentPackage("com.veryreader.d2p")
-                .tablePrefix("")
+                .moduleName("user")
+                .tableName("pm_user_role")
+                .parentPackage("com.veryreader.d2p.api.modules")
+                .tablePrefix("pm")
                 .apiUrlPrefix("")
                 .build();
+        generateService.generate(request);
+        request.setTableName("pm_role");
+        generateService.generate(request);
+        request.setTableName("pm_menu");
+        generateService.generate(request);
+        request.setTableName("pm_role_menu");
         generateService.generate(request);
     }
 
