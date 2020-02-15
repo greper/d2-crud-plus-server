@@ -4,12 +4,16 @@ export const crudOptions = {
 <#list table.fields as field>
     {
         title: '${field.comment}',
-        key: '${field.name}',
-        sortable: true,
-        <#if field.propertyType == 'LocalDateTime'>type: 'date',<#else>// type: 'select',</#if>
-        // search: { disabled: true }, //开启查询
-        // form: { disabled: true } //表单配置
-        // disabled: false //是否隐藏列
+        key: '${field.propertyName}',
+        <#if field.propertyType == 'LocalDateTime'>type: 'datetime',<#else>// type: 'select',</#if>
+        // dict: { url: ''} //数据字典
+        // search: { disabled: false}, // 开启查询
+        // disabled: true, // 隐藏列
+        form: { // 表单配置
+            // disabled: true, // 禁用表单编辑
+            // rules: [{ required: true, message: '请输入${field.comment}' }]
+        },
+        sortable: true
     }<#if field_has_next>,</#if>
 </#list>
    <#------------  END 字段循环遍历  ---------->

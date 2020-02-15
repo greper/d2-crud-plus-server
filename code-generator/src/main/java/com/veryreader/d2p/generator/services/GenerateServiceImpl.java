@@ -48,6 +48,8 @@ public class GenerateServiceImpl implements GenerateService {
         globalConfig.setAuthor("auto generator");
         globalConfig.setOpen(false);
         globalConfig.setFileOverride(true);
+        globalConfig.setBaseColumnList(true);
+        globalConfig.setServiceName("%sService");
         generator.setGlobalConfig(globalConfig);
 
 
@@ -78,6 +80,7 @@ public class GenerateServiceImpl implements GenerateService {
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(request.getModuleName());
         pc.setParent(request.getParentPackage());
+        pc.setServiceImpl("service");
         generator.setPackageInfo(pc);
 
         //自定义配置
@@ -94,7 +97,7 @@ public class GenerateServiceImpl implements GenerateService {
         List<FileOutConfig> focList = new ArrayList<>();
         Map<String,String> fronts = new HashMap<>();
         fronts.put("/templates/front/crud.js.ftl","/crud.js");
-        fronts.put("/templates/front/page.vue.ftl","/page.vue");
+        fronts.put("/templates/front/index.vue.ftl","/index.vue");
         fronts.put("/templates/front/api.js.ftl","/api.js");
         fronts.put("/templates/front/router.js.ftl","/router.js");
         // 自定义配置会被优先输出
@@ -112,14 +115,6 @@ public class GenerateServiceImpl implements GenerateService {
 
         cfg.setFileOutConfigList(focList);
         generator.setCfg(cfg);
-
-
-        // 配置自定义输出模板
-        //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-        // templateConfig.setEntity("templates/entity2.java");
-        // templateConfig.setService();
-        // templateConfig.setController();
-
         generator.setTemplate(templateConfig);
 
         // 策略配置
@@ -129,11 +124,14 @@ public class GenerateServiceImpl implements GenerateService {
         //strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
+        strategy.setLogicDeleteFieldName(request.getLogicDeleteField());
         // 公共父类
        // strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
         // strategy.setSuperEntityColumns("id");
         strategy.setInclude(request.getTableName());
+
+        strategy.setTableFillList(request.getFillList());
 
         //是否驼峰转连接字符
         strategy.setControllerMappingHyphenStyle(false);

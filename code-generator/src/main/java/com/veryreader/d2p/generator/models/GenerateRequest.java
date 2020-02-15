@@ -1,9 +1,14 @@
 package com.veryreader.d2p.generator.models;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description:
@@ -21,4 +26,14 @@ public class GenerateRequest {
     private String moduleName;
     private String tablePrefix;
     private String apiUrlPrefix;
+    private String logicDeleteField = "del_flag";
+    private List<TableFill> fillList;
+
+    public  GenerateRequest addFill(String fieldName, FieldFill fieldFill){
+        if(fillList == null){
+            fillList = new ArrayList<>();
+        }
+        fillList.add(new TableFill(fieldName,fieldFill));
+        return this;
+    }
 }
