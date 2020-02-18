@@ -4,6 +4,7 @@ import com.veryreader.d2p.api.security.config.SecurityPropertiesConfig;
 import com.veryreader.d2p.api.security.vo.LoginUser;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -42,7 +43,13 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             return;
         }
         // 如果请求头中有token，则进行解析，并且设置认证信息
-        SecurityContextHolder.getContext().setAuthentication(getAuthentication(tokenHeader));
+        try {
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(tokenHeader);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }catch (Exception e){
+            throw new BadCredentialsException("token无效");
+        }
+
         super.doFilterInternal(request, response, chain);
     }
 
