@@ -41,3 +41,10 @@ security:
   jwtIssuer: greper
   #token有效期一天
   tokenExpiration: 86400
+
+logging:
+  level:
+    com.veryreader: DEBUG
+    com.ibatis: DEBUG
+    com.ibatis.common.jdbc.SimpleDataSource: DEBUG
+    com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate: DEBUG

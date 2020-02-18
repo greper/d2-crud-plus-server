@@ -30,7 +30,9 @@ public class DemoInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
+        if(!config.getEditDisabled()){
+            return true;
+        }
         String path = request.getRequestURI();
         for (String item : INTERCEPT_URLS) {
             if (ANT_PATHMATCHER.match(request.getContextPath() + item, path)) {
