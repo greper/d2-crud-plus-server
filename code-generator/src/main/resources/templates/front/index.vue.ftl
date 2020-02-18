@@ -39,6 +39,9 @@
   export default {
     name: '${table.entityName}',
     mixins: [d2CrudPlus.crud],
+    data () {
+      return {}
+    },
     methods: {
       getCrudOptions () {
         return crudOptions

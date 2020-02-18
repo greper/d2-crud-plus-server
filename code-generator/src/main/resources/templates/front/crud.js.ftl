@@ -5,8 +5,8 @@ export const crudOptions = {
     {
         title: '${field.comment}',
         key: '${field.propertyName}',
-        <#if field.propertyType == 'LocalDateTime'>type: 'datetime',<#else>// type: 'select',</#if>
-        // dict: { url: ''} //数据字典
+        <#if field.propertyType == 'LocalDateTime'>type: 'datetime',width: 152,<#else>// type: 'select',</#if>
+        // dict: { url: ''}, //数据字典
         // search: { disabled: false}, // 开启查询
         // disabled: true, // 隐藏列
         form: { // 表单配置

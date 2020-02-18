@@ -16,4 +16,14 @@ import java.util.List;
 public interface UserService extends IService<User> {
 
     List<Long> getUserRoleIds(Long userId);
+
+    void authz(Long userId, List<Long> roleIds);
+
+    void add(User user);
+
+    boolean update(User user);
+
+    User getByUsername(String username, boolean withRoles);
+
+    boolean verifyPassword(User user, String password);
 }

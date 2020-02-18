@@ -15,13 +15,27 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-security-jwt.version>1.0.9.RELEASE</spring-security-jwt.version>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
     <dependencies>
 
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>${spring-security-jwt.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

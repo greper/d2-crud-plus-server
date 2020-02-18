@@ -14,6 +14,6 @@
             <foreach item="roleId" collection="roleIds" open="(" separator="," close=")">
                 #{roleId}
             </foreach>
-        and a.id = prr.resource_id and a.del_flag = 0 and prr.del_flag = 0
+        and a.id = prr.resource_id and a.del_flag = 0 and prr.del_flag = 0 order by a.sort asc
     </select>
 </mapper>

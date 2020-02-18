@@ -34,8 +34,14 @@ public class Ret<T> {
     public static Ret error(int code, String msg, Object data) {
         return new Ret(code,msg,data);
     }
+    public static Ret error(String msg, Object data) {
+        return new Ret(1,msg,data);
+    }
 
     public static Ret success(String msg, Object data) {
         return new  Ret(0,msg,data);
+    }
+    public static Ret success() {
+        return new  Ret(0,"success",null);
     }
 }

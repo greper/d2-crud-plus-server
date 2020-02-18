@@ -3,7 +3,6 @@ package com.veryreader.d2p.api.modules.permission.service;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.veryreader.d2p.api.modules.permission.entity.RoleResource;
 import com.veryreader.d2p.api.modules.permission.mapper.RoleResourceMapper;
-import com.veryreader.d2p.api.modules.permission.service.RoleResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

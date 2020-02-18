@@ -1,4 +1,4 @@
-package com.veryreader.d2p.api.modules.permission.controller;
+package com.veryreader.d2p.api.modules.permission.controller.manager;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/permission/role")
+@RequestMapping("/permission/manager/role")
 public class RoleController {
     private final RoleService roleService;
     private final RoleResourceService roleResourceService;
@@ -120,6 +120,16 @@ public class RoleController {
         return Ret.success("", ids);
     }
 
+    /**
+     * 获取角色列表
+     *
+     * @return Ret
+     */
+    @GetMapping("/list")
+    public Ret list() {
+        List<Role> roleList = roleService.getRoleList();
+        return Ret.success("", roleList);
+    }
 
 
 }

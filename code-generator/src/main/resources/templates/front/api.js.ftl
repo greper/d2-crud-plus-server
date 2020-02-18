@@ -1,5 +1,5 @@
 import request from '@/plugin/axios'
-const apiPrefix = '${cfg.apiUrlPrefix}/${package.ModuleName}/${table.entityPath}'
+const apiPrefix = '${cfg.apiUrlPrefix}/${package.ModuleName}/manager/${table.entityPath}'
 export function GetList (query) {
   return request({
     url: apiPrefix + '/page',

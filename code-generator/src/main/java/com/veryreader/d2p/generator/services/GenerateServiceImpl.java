@@ -81,6 +81,7 @@ public class GenerateServiceImpl implements GenerateService {
         pc.setModuleName(request.getModuleName());
         pc.setParent(request.getParentPackage());
         pc.setServiceImpl("service");
+        pc.setController("controller.manager");
         generator.setPackageInfo(pc);
 
         //自定义配置

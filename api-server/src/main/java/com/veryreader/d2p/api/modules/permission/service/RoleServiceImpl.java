@@ -1,9 +1,7 @@
 package com.veryreader.d2p.api.modules.permission.service;
 
 import com.veryreader.d2p.api.modules.permission.entity.Role;
-import com.veryreader.d2p.api.modules.permission.entity.RoleResource;
 import com.veryreader.d2p.api.modules.permission.mapper.RoleMapper;
-import com.veryreader.d2p.api.modules.permission.service.RoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,5 +25,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Transactional(rollbackFor = Exception.class)
     public void authz(Long roleId, List<Long> resourceIds) {
         roleResourceService.authz(roleId,resourceIds);
+    }
+
+    @Override
+    public List<Role> getRoleList() {
+        return this.list();
     }
 }

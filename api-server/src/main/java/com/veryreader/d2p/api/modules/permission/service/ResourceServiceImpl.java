@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.veryreader.d2p.api.modules.permission.entity.Resource;
 import com.veryreader.d2p.api.modules.permission.mapper.ResourceMapper;
-import com.veryreader.d2p.api.modules.permission.service.ResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +47,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     @Override
     public List<Resource> findResourceTree(Resource query) {
         LambdaQueryWrapper<Resource> wrapper = Wrappers.lambdaQuery(query);
+        wrapper.orderByAsc(Resource::getSort);
         List<Resource> list = this.list(wrapper);
         List<Resource> tree = buildTree(list,null);
         return tree;

@@ -1,7 +1,8 @@
-package com.veryreader.d2p.api.modules.permission.controller;
+package com.veryreader.d2p.api.modules.permission.controller.manager;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/permission/resource")
+@RequestMapping("/permission/manager/resource")
 public class ResourceController {
     private final ResourceService resourceService;
 
@@ -44,16 +45,16 @@ public class ResourceController {
         // betweenDateRange(wrapper, Resource::getCreateTime, dateRange);
         // wrapper.eq(Resource::getDelFlag, '0');
 
-
         return Ret.success("", resourceService.page(page, wrapper));
     }
 
     /**
      * 查询全部，返回树形结构
+     *
      * @return
      */
     @GetMapping("/tree")
-    public Ret getTree( Resource query) {
+    public Ret getTree(Resource query) {
         List<Resource> tree = resourceService.findResourceTree(query);
         return Ret.success("", tree);
     }

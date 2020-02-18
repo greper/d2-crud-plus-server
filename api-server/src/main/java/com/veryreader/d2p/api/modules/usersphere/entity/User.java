@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -36,13 +39,10 @@ public class User implements Serializable {
 
     /**
      * 密码
+     * 禁止密码泄露
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-
-    /**
-     * 随机盐
-     */
-    private String salt;
 
     /**
      * 昵称
@@ -92,7 +92,13 @@ public class User implements Serializable {
 
 
     @TableField(exist=false)
-    private List<String> roles;
+    private List<Long> roles;
 
 
+    public void addRole(Long roleId) {
+        if(roles == null){
+            roles = new ArrayList<>();
+        }
+        roles.add(roleId);
+    }
 }

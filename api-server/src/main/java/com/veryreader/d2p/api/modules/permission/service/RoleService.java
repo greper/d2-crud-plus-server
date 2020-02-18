@@ -21,4 +21,10 @@ public interface RoleService extends IService<Role> {
      * @param resourceIds
      */
     void authz(Long roleId, List<Long> resourceIds);
+
+    /**
+     * 获取可选的角色列表
+     * @return
+     */
+    List<Role> getRoleList();
 }
