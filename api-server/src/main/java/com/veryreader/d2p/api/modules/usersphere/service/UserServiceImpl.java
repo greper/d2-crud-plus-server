@@ -62,6 +62,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean update(User user) {
         if(StringUtils.isNotBlank(user.getPassword())){
             generatePassword(user);
+        }else{
+            user.setPassword(null);
         }
         user.setUsername(null);//禁止修改用户名
         this.updateById(user);
