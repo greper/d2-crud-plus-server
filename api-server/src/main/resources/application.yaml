@@ -27,6 +27,8 @@ uploader:
     endpoint: oss-cn-shenzhen.aliyuncs.com
     roleArn: "acs:ram::1831228848739566:role/ramosstemp"
 
+demo:
+  editDisabled: false
 
 security:
   # 默认为 authorization ，d2-admin示例中为X-Token

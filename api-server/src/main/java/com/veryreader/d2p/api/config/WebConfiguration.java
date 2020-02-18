@@ -1,7 +1,9 @@
 package com.veryreader.d2p.api.config;
 
+import com.veryreader.d2p.api.web.interceptor.DemoInterceptor;
 import com.veryreader.d2p.api.web.interceptor.GlobalExceptionResolver;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -19,6 +21,9 @@ import java.util.List;
 @Primary
 @Slf4j
 public class WebConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    private DemoInterceptor demoInterceptor;
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
@@ -26,7 +31,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(demoInterceptor).addPathPatterns("/**");
     }
 
     @Override
@@ -39,5 +44,5 @@ public class WebConfiguration implements WebMvcConfigurer {
     GlobalExceptionResolver getGlobalExceptionResolver() {
         return new GlobalExceptionResolver();
     }
-
 }
+
