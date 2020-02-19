@@ -8,7 +8,7 @@
     </sql>
 
     <select id="selectByRoleIds" resultType="com.veryreader.d2p.api.modules.permission.entity.Resource">
-        select
+        select distinct
         <include refid="Base_Column_List"/>
         from pm_resource as a, pm_role_resource as prr where prr.role_id in
             <foreach item="roleId" collection="roleIds" open="(" separator="," close=")">
