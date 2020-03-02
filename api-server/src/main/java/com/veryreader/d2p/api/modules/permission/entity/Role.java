@@ -30,6 +30,8 @@ public class Role implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    private Long platformId;
+
     /**
      * 角色名称
      */
@@ -46,7 +48,7 @@ public class Role implements Serializable {
     private Long parentId;
 
     @TableLogic
-    private Integer delFlag;
+    private Boolean delFlag;
 
     /**
      * 创建时间

@@ -54,11 +54,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public List<Resource> findResourceTreeByRoleIds(List<Long> roleIds) {
+    public List<Resource> findResourceTreeByRoleIds(List<Long> roleIds, Long platformId) {
         if(roleIds == null || roleIds.size() == 0){
             return new ArrayList<>(0);
         }
-        List<Resource> list = baseMapper.selectByRoleIds(roleIds);
+        List<Resource> list = baseMapper.selectByRoleIds(roleIds,platformId);
         List<Resource> tree = buildTree(list,null);
         return tree;
     }

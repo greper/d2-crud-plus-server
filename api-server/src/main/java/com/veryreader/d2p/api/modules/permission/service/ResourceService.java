@@ -17,5 +17,5 @@ public interface ResourceService extends IService<Resource> {
 
     List<Resource> findResourceTree(Resource query);
 
-    List<Resource> findResourceTreeByRoleIds(List<Long> roleIds);
+    List<Resource> findResourceTreeByRoleIds(List<Long> roleIds, Long platformId);
 }

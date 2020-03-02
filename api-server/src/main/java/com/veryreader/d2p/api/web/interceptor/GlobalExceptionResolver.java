@@ -59,6 +59,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
                     //业务失败的异常，如“账号或密码错误”
                     ClientException be = (ClientException) e;
                     result = Ret.error(be.getCode(),e.getMessage(),be.getData());
+                    response.setStatus(200);
                     log.error("操作失败：{}->{}", e.getMessage(), request.getRequestURL(),e);
                 } else {
                     //String msg =  "服务器内部错误";

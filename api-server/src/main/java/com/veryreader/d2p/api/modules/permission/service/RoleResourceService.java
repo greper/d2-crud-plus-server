@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface RoleResourceService extends IService<RoleResource> {
 
-    void authz(Long roleId, List<Long> resourceIds);
+    void authz(Long roleId, Long platformId, List<Long> resourceIds);
 
     List<Long> getResourceIdsByRoleId(Long roleId);
 

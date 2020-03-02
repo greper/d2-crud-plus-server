@@ -25,6 +25,7 @@ uploader:
     accessKeySecret: 你的阿里云 accessKeySecret
     bucket: d2p-demo
     endpoint: oss-cn-shenzhen.aliyuncs.com
+    # 你的阿里云ram角色id
     roleArn: "acs:ram::1831228848739566:role/ramosstemp"
 
 # 是否禁止修改数据

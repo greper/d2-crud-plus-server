@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 public class SecurityPropertiesConfig {
-    private String tokenHeader = "Authorization";
+    private String tokenHeader = "authorization";
     private String tokenPrefix = "Bearer ";
 
 

@@ -32,6 +32,8 @@ class CodeGeneratorApplicationTests {
         generateService.generate(request);
         request.setTableName("pm_role_resource");
         generateService.generate(request);
+        request.setTableName("pm_platform");
+        generateService.generate(request);
     }
 
     @Test

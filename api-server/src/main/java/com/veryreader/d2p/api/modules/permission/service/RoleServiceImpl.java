@@ -24,7 +24,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void authz(Long roleId, List<Long> resourceIds) {
-        roleResourceService.authz(roleId,resourceIds);
+        Role role = this.getById(roleId);
+        roleResourceService.authz(roleId, role.getPlatformId(),resourceIds);
     }
 
     @Override

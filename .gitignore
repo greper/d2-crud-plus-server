@@ -31,4 +31,6 @@ build/
 ### VS Code ###
 .vscode/
 api-server/src/**/application-xiao.yaml
+api-server/src/**/application-prod.yaml
 api-server/src/**/application-local.yaml
+api-server/src/**/application-remote.yaml

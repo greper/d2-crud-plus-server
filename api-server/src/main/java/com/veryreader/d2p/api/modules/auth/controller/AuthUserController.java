@@ -2,7 +2,9 @@ package com.veryreader.d2p.api.modules.auth.controller;
 
 
 import com.veryreader.d2p.api.model.vo.Ret;
+import com.veryreader.d2p.api.modules.permission.entity.Platform;
 import com.veryreader.d2p.api.modules.permission.entity.Resource;
+import com.veryreader.d2p.api.modules.permission.service.PlatformService;
 import com.veryreader.d2p.api.modules.permission.service.ResourceService;
 import com.veryreader.d2p.api.modules.usersphere.entity.User;
 import com.veryreader.d2p.api.modules.usersphere.service.UserService;
@@ -29,6 +31,7 @@ public class AuthUserController {
 
     private final ResourceService resourceService;
     private final UserService userService;
+    private final PlatformService platformService;
 
     /**
      * @return
@@ -46,10 +49,11 @@ public class AuthUserController {
      * @return
      */
     @RequestMapping(value = "/permissions", method = RequestMethod.GET)
-    public Ret getPermissions(Authentication authentication) {
+    public Ret getPermissions(Authentication authentication,@RequestParam String platformCode) {
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         List<Long> roleIds = userService.getUserRoleIds(loginUser.getId());
-        List<Resource> list = resourceService.findResourceTreeByRoleIds(roleIds);
+        Platform platform = platformService.getByCode(platformCode);
+        List<Resource> list = resourceService.findResourceTreeByRoleIds(roleIds,platform.getId());
         return Ret.success("",list);
     }
 

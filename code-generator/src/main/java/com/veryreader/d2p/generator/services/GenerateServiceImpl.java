@@ -1,9 +1,11 @@
 package com.veryreader.d2p.generator.services;
 
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.veryreader.d2p.generator.models.GenerateRequest;
@@ -11,11 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description:
@@ -50,6 +50,7 @@ public class GenerateServiceImpl implements GenerateService {
         globalConfig.setFileOverride(true);
         globalConfig.setBaseColumnList(true);
         globalConfig.setServiceName("%sService");
+        globalConfig.setDateType(DateType.ONLY_DATE);
         generator.setGlobalConfig(globalConfig);
 
 
@@ -90,26 +91,35 @@ public class GenerateServiceImpl implements GenerateService {
             public void initMap() {
                 Map<String, Object> map = new HashMap<>();
                 map.put("apiUrlPrefix", request.getApiUrlPrefix());
+                map.put("now", DateUtil.format(new Date(),"yyyy-MM-dd HH:mm:ss"));
                 this.setMap(map);
             }
         };
 
         // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
-        Map<String,String> fronts = new HashMap<>();
-        fronts.put("/templates/front/crud.js.ftl","/crud.js");
-        fronts.put("/templates/front/index.vue.ftl","/index.vue");
-        fronts.put("/templates/front/api.js.ftl","/api.js");
-        fronts.put("/templates/front/router.js.ftl","/router.js");
+        Map<String,String> customFiles = new HashMap<>();
+        customFiles.put("/templates/front/crud.js.ftl","/crud.js");
+        customFiles.put("/templates/front/index.vue.ftl","/index.vue");
+        customFiles.put("/templates/front/api.js.ftl","/api.js");
+        customFiles.put("/templates/front/router.js.ftl","/router.js");
+
+        customFiles.put("/templates/sql/resource.sql.ftl","_menu.sql");
         // 自定义配置会被优先输出
         String finalRootDir = rootDir;
-        for (Map.Entry<String, String> entry : fronts.entrySet()) {
+        for (Map.Entry<String, String> entry : customFiles.entrySet()) {
 
             focList.add(new FileOutConfig(entry.getKey()) {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
+                    String value = entry.getValue();
+                    String key = entry.getKey();
                     // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                    return finalRootDir + "/front/"+request.getModuleName()+"/"+ tableInfo.getEntityPath() +entry.getValue();
+                    String dir = "/front";
+                    if(key.endsWith("sql.ftl")){
+                       dir = "/sql";
+                    }
+                    return finalRootDir + dir+"/"+request.getModuleName()+"/"+ tableInfo.getEntityPath() + value;
                 }
             });
         }

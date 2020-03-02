@@ -33,6 +33,8 @@ public class Resource implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    private Long platformId;
+
     /**
      * 菜单名称
      */
@@ -79,7 +81,7 @@ public class Resource implements Serializable {
      * 逻辑删除
      */
     @TableLogic
-    private Integer delFlag;
+    private Boolean delFlag;
 
     /**
      * 创建时间
