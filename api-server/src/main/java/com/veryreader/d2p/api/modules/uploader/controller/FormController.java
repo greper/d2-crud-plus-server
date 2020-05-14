@@ -110,7 +110,7 @@ public class FormController {
 
         File dest = new File(fileDiskPath);
         file.transferTo(dest);
-        return  Ret.success("","/upload/form/download?key="+key);
+        return  Ret.success("",urlPrefix+"/upload/form/download?key="+key);
     }
 
 
