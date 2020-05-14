@@ -40,8 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
-                //.antMatchers(HttpMethod.POST, "/users/signup").permitAll()
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers( "/api/upload/**","/upload/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
@@ -76,14 +77,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/v2/**",
                         "/**/*.ttf",
-                        "/upload/**"
+                        "/upload/**",
+                        "/swagger-resources/configuration/ui",
+                        "/swagger-resources",
+                        "/swagger-resources/configuration/security",
+                        "/swagger-ui.html",
+                        "/upload/**",
+                        "/error/**"
                 );
-        web.ignoring().antMatchers("/v2/api-docs",
-                "/swagger-resources/configuration/ui",
-                "/swagger-resources",
-                "/swagger-resources/configuration/security",
-                "/swagger-ui.html"
-        );
     }
 
     @Bean

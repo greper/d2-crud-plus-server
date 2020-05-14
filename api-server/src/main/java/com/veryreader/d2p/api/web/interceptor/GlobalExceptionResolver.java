@@ -83,7 +83,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
             }
         } else {
             log.error(e.getMessage(), e);
-            mv.setViewName("error/500");
+            throw new RuntimeException(e);
         }
         //如果返回null，则交给后续的Exceptionresolver处理
         return mv;

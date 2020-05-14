@@ -31,17 +31,17 @@ public class Ret<T> {
         this.data = data;
     }
 
-    public static Ret error(int code, String msg, Object data) {
-        return new Ret(code,msg,data);
+    public static<T>  Ret<T> error(int code, String msg, T data) {
+        return new Ret<>(code,msg,data);
     }
-    public static Ret error(String msg, Object data) {
-        return new Ret(1,msg,data);
+    public static <T> Ret<T> error(String msg, T data) {
+        return new Ret<>(1,msg,data);
     }
 
-    public static Ret success(String msg, Object data) {
-        return new  Ret(0,msg,data);
+    public static <T> Ret<T> success(String msg, T data) {
+        return new  Ret<>(0,msg,data);
     }
-    public static Ret success() {
-        return new  Ret(0,"success",null);
+    public static <T> Ret<T> success() {
+        return new  Ret<>(0,"success",null);
     }
 }
