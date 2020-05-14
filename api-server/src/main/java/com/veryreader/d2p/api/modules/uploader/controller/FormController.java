@@ -24,7 +24,6 @@ import java.util.Date;
 @Controller
 @RequestMapping("/upload/form")
 @Slf4j
-@AllArgsConstructor
 public class FormController {
 
     private static final String FILE_DIR = System.getProperty("java.io.tmpdir");
