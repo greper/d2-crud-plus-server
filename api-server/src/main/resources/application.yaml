@@ -2,6 +2,8 @@ server:
   port: 7070
   servlet:
     context-path: /api
+  url:
+    prefix: /api
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
