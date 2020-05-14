@@ -1,2 +1,6 @@
 demo:
   editDisabled: true
+
+server:
+  url:
+    prefix: http://d2p.veryreader.com:7070/api

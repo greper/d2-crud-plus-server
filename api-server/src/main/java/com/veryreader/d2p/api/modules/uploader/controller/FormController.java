@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.veryreader.d2p.api.model.vo.Ret;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,8 @@ public class FormController {
 
     private static final String FILE_DIR = System.getProperty("java.io.tmpdir");
 
+    @Value("${server.url.prefix:/api}")
+    private String urlPrefix;
     /**
      * @param request
      * @param response
@@ -107,7 +110,7 @@ public class FormController {
 
         File dest = new File(fileDiskPath);
         file.transferTo(dest);
-        return  Ret.success("","/api/upload/form/download?key="+key);
+        return  Ret.success("","/upload/form/download?key="+key);
     }
 
 
