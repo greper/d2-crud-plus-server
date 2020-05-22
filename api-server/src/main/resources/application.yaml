@@ -17,6 +17,10 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  #flyway 配置，自动数据库升级
+  flyway:
+    clean-disabled: false
+    baselineOnMigrate: true
 uploader:
   qiniu:
     accessKey: 你的七牛accessKey
@@ -55,3 +59,4 @@ logging:
     com.ibatis: DEBUG
     com.ibatis.common.jdbc.SimpleDataSource: DEBUG
     com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate: DEBUG
+
