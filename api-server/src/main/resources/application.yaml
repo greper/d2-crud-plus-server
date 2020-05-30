@@ -5,6 +5,10 @@ server:
   url:
     prefix: /api
 spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,6 +25,7 @@ spring:
   flyway:
     clean-disabled: false
     baselineOnMigrate: true
+
 uploader:
   qiniu:
     accessKey: 你的七牛accessKey
