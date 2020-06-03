@@ -5,13 +5,8 @@
 
 package com.veryreader.d2p.api.modules.ueditor;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,7 +117,8 @@ public final class CustomConfigManager {
         }
 
         this.parentPath = file.getParent();
-        String configContent = this.readFile(this.getConfigPath());
+        URL resource = this.getClass().getClassLoader().getResource(configFileName);
+        String configContent = this.readFile(resource);
 
         try {
             JSONObject jsonConfig = new JSONObject(configContent);
@@ -149,11 +145,11 @@ public final class CustomConfigManager {
         return result;
     }
 
-    private String readFile(String path) throws IOException {
+    private String readFile(URL source) throws IOException {
         StringBuilder builder = new StringBuilder();
 
         try {
-            InputStreamReader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
+            InputStreamReader reader = new InputStreamReader(source.openStream());
             BufferedReader bfReader = new BufferedReader(reader);
             String tmpContent = null;
 
@@ -162,7 +158,8 @@ public final class CustomConfigManager {
             }
 
             bfReader.close();
-        } catch (UnsupportedEncodingException var6) {
+        } catch (UnsupportedEncodingException e) {
+            log.error(e.getMessage(),e);
         }
 
         return this.filter(builder.toString());
