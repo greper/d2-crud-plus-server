@@ -2,12 +2,14 @@ package com.veryreader.d2p.api.modules.ueditor;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -23,14 +25,13 @@ public class UeditorController {
     private String rootPath;
 
     public UeditorController() {
-        String path  = UeditorController.class.getClassLoader().getResource("application.yaml").getPath();
-        File file =  new File(path);
-        if(file.getParentFile().isDirectory()) {
-            rootPath = new File(path).getParent()+"/static/";
-        }else{
-            rootPath = new File(path).getParentFile().getParent()+"/static";
+        try {
+            rootPath = ResourceUtils.getURL("static").getPath();
+            //rootPath = rootPath.replace("file:","");
+        } catch (FileNotFoundException e) {
+            log.error(e.getMessage(),e);
         }
-        rootPath = rootPath.replace("file:","");
+
     }
 
     /**
