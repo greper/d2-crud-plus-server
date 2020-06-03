@@ -64,4 +64,3 @@ logging:
     com.ibatis: DEBUG
     com.ibatis.common.jdbc.SimpleDataSource: DEBUG
     com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate: DEBUG
-

@@ -14,10 +14,7 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -45,7 +42,7 @@ public class DictsController  {
 
     /**
      */
-    @GetMapping("/")
+    @RequestMapping(value = "/",method = {RequestMethod.POST,RequestMethod.GET})
     public Ret<Map<String,List<EnumDict>>> dicts(HttpServletResponse response) throws IOException, ClassNotFoundException {
         //5小时浏览器过期
         response.setDateHeader("Expires", System.currentTimeMillis()+ 5*DateUtils.MILLIS_PER_HOUR);
@@ -55,7 +52,7 @@ public class DictsController  {
 
     /**
      */
-    @GetMapping("/{name}")
+    @RequestMapping(value = "/{name}",method = {RequestMethod.POST,RequestMethod.GET})
     public Ret<List<EnumDict>> dictByName(HttpServletResponse response, @PathVariable("name") String name) throws IOException, ClassNotFoundException {
         //5小时浏览器过期
         response.setDateHeader("Expires", System.currentTimeMillis()+5*DateUtils.MILLIS_PER_HOUR);
