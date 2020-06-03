@@ -42,7 +42,7 @@ public class UeditorController {
     public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try{
 
-
+            log.debug("rootPath:{}",rootPath);
             request.setCharacterEncoding( "utf-8" );
             response.setHeader("Content-Type" , "text/html");
             response.getWriter().write(new CustomActionEnter( request, rootPath ).exec());

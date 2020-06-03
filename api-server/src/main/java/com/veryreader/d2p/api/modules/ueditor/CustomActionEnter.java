@@ -19,7 +19,7 @@ public class CustomActionEnter {
 
     private String actionType = null;
 
-    private ConfigManager configManager = null;
+    private CustomConfigManager configManager = null;
 
     public CustomActionEnter ( HttpServletRequest request, String rootPath ) {
 
@@ -27,7 +27,7 @@ public class CustomActionEnter {
         this.rootPath = rootPath;
         this.actionType = request.getParameter( "action" );
         this.contextPath = request.getContextPath();
-        this.configManager = ConfigManager.getInstance( this.rootPath, this.contextPath, request.getRequestURI() );
+        this.configManager = CustomConfigManager.getInstance( this.rootPath, this.contextPath, request.getRequestURI() );
 
     }
 
