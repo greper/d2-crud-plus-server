@@ -1,19 +1,14 @@
 package com.veryreader.d2p.api.modules.ueditor;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.baidu.ueditor.ConfigManager;
 import com.baidu.ueditor.define.ActionMap;
 import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.State;
-import com.baidu.ueditor.hunter.CustomFileManager;
-import com.baidu.ueditor.hunter.FileManager;
 import com.baidu.ueditor.hunter.ImageHunter;
-import com.baidu.ueditor.upload.Uploader;
-import com.veryreader.d2p.api.modules.ueditor.CustomUploader;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 public class CustomActionEnter {
 
