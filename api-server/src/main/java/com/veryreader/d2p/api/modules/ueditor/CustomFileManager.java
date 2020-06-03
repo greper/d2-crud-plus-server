@@ -1,4 +1,4 @@
-package com.baidu.ueditor.hunter;
+package com.veryreader.d2p.api.modules.ueditor;
 
 import java.io.File;
 import java.util.Arrays;

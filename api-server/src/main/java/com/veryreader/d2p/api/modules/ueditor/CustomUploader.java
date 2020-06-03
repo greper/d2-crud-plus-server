@@ -2,8 +2,6 @@ package com.veryreader.d2p.api.modules.ueditor;
 
 import com.baidu.ueditor.define.State;
 import com.baidu.ueditor.upload.Base64Uploader;
-import com.baidu.ueditor.upload.BinaryUploader;
-import com.baidu.ueditor.upload.Uploader;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
