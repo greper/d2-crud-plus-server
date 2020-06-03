@@ -1,4 +1,5 @@
 FROM java:8-jre
 EXPOSE 7070
-ADD ./target/api-server.jar /app/
+ARG project_dir="."
+ADD ${project_dir}/target/api-server.jar /app/
 ENTRYPOINT exec java $JAVA_OPTS  -jar  /app/api-server.jar
