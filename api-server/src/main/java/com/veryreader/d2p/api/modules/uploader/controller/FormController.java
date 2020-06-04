@@ -1,6 +1,7 @@
 package com.veryreader.d2p.api.modules.uploader.controller;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.veryreader.d2p.api.model.vo.Ret;
@@ -17,7 +18,7 @@ import java.io.*;
 import java.util.Date;
 
 /**
- * @Description:
+ * @Description: 文件默认存储在临时目录下，上生产前需要注意
  * @Author: xiaojunnuo
  * @CreateDate: 2019/8/30$
  */
@@ -65,24 +66,13 @@ public class FormController {
         } catch ( IOException e ) {
             log.error("下载失败",e);
         } finally {
-            if (bis != null) {
-                try {
-                    bis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            IoUtil.close(bis);
+            IoUtil.close(outputStream);
         }
         //成功后返回成功信息
     }
     /**
+     * 文件默认存储在临时目录下，如果你要直接用这个上生产的话，需要注意
      * @return
      */
     @RequestMapping(value="/upload",method = RequestMethod.POST)
