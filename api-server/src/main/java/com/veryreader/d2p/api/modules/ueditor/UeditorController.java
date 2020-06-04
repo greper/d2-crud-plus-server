@@ -29,6 +29,7 @@ public class UeditorController {
     /**
      *
      * 上传示例仅供参考，切勿上生产环境
+     * 文件保存在临时目录，实际使用请配置其他目录
      * @return
      */
     @RequestMapping("/")
