@@ -23,19 +23,8 @@ import java.io.*;
 @Slf4j
 @AllArgsConstructor
 public class UeditorController {
-    private String rootPath;
 
     private static final String FILE_DIR = System.getProperty("java.io.tmpdir");
-
-    public UeditorController() {
-        try {
-            rootPath = ResourceUtils.getURL("static").getPath();
-            //rootPath = rootPath.replace("file:","");
-        } catch (FileNotFoundException e) {
-            log.error(e.getMessage(),e);
-        }
-
-    }
 
     /**
      *
@@ -45,8 +34,6 @@ public class UeditorController {
     @RequestMapping("/")
     public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try{
-
-            log.debug("rootPath:{}",rootPath);
             request.setCharacterEncoding( "utf-8" );
             response.setHeader("Content-Type" , "text/html");
             response.getWriter().write(new CustomActionEnter( request, FILE_DIR ).exec());
