@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 
 /**
 * @Description:    统一异常处理
@@ -59,6 +60,10 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
                     //业务失败的异常，如“账号或密码错误”
                     ClientException be = (ClientException) e;
                     result = Ret.error(be.getCode(),e.getMessage(),be.getData());
+                    response.setStatus(200);
+                    log.error("操作失败：{}->{}", e.getMessage(), request.getRequestURL(),e);
+                } else if (e instanceof AccessDeniedException) {
+                    result = Ret.error(10001,"对不起，您的权限不足",null);
                     response.setStatus(200);
                     log.error("操作失败：{}->{}", e.getMessage(), request.getRequestURL(),e);
                 } else {

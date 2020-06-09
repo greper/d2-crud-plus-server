@@ -1,10 +1,12 @@
 package com.veryreader.d2p.api.modules.permission.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.veryreader.d2p.api.modules.permission.entity.Resource;
 import com.veryreader.d2p.api.modules.permission.mapper.ResourceMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,5 +63,26 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         List<Resource> list = baseMapper.selectByRoleIds(roleIds,platformId);
         List<Resource> tree = buildTree(list,null);
         return tree;
+    }
+
+    @Override
+    public void clearPermissionCache() {
+
+    }
+
+
+    @Override
+    public List<String> findPermissionByRoleIds(List<Long> roleIds, Long platformId) {
+        if(roleIds == null || roleIds.size() == 0){
+            return new ArrayList<>(0);
+        }
+        List<Resource> list = baseMapper.selectByRoleIds(roleIds,platformId);
+        List<String> permissions = new ArrayList<>();
+        for (Resource item : list) {
+            if(StringUtils.isNotBlank(item.getPermission())){
+                permissions.add(item.getPermission());
+            }
+        }
+        return permissions;
     }
 }
