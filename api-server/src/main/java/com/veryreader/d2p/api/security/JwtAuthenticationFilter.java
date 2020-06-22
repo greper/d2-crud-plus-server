@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             UsernamePasswordAuthenticationToken authentication = getAuthentication(tokenHeader);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }catch (Exception e){
-            throw new BadCredentialsException("token无效");
+            throw new BadCredentialsException("token无效",e);
         }
 
         super.doFilterInternal(request, response, chain);

@@ -49,7 +49,7 @@ demo:
 
 security:
   # 默认为 authorization ，d2-admin示例中为X-Token
-  tokenHeader: "x-token"
+  tokenHeader: "authorization"
   # 默认为 "Bearer " ，d2-admin示例中无prefix
   tokenPrefix: ""
   # 这里设置jwt的密钥
