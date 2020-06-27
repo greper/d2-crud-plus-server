@@ -4,9 +4,8 @@ import com.veryreader.d2p.api.security.config.SecurityPropertiesConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
+import org.springframework.security.authentication.BadCredentialsException;
 import java.util.Date;
-import java.util.Optional;
 
 /**
  * <p>JwtTokenUtil</p>
@@ -20,7 +19,7 @@ public class JwtTokenUtil {
     private static final long EXPIRATION = 1800L;
 
     public static String createToken(SecurityPropertiesConfig config, Claims claims) {
-        return createToken(null, config.getJwtSecret(), config.getJwtIssuer(), config.getTokenExpiration(),claims);
+        return createToken(null, config.getJwtSecret(), config.getJwtIssuer(), config.getTokenExpiration(), claims);
     }
 
     /**
@@ -32,7 +31,7 @@ public class JwtTokenUtil {
      * @param claims     自定义参数
      * @return
      */
-    public static String createToken(String subject,String secret,String issuer,Integer expiration, Claims claims) {
+    public static String createToken(String subject, String secret, String issuer, Integer expiration, Claims claims) {
         return Jwts.builder()
                 // JWT_ID：是JWT的唯一标识，根据业务需要，这个可以设置为一个不重复的值，主要用来作为一次性token,从而回避重放攻击。
 //                .setId(id)
@@ -60,8 +59,8 @@ public class JwtTokenUtil {
      * @param token
      * @return
      */
-    public static boolean isExpiration(String token,String secret) {
-        return getTokenBody(token,secret).getExpiration().before(new Date());
+    public static boolean isExpiration(String token, String secret) {
+        return getTokenBody(token, secret).getExpiration().before(new Date());
     }
 
     /**
@@ -70,10 +69,15 @@ public class JwtTokenUtil {
      * @param token
      * @return
      */
-    public static Claims getTokenBody(String token,String secret) {
-        return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
+    public static Claims getTokenBody(String token, String secret) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            throw new  BadCredentialsException(e.getMessage());
+        }
+
     }
 }

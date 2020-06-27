@@ -1,5 +1,7 @@
 package com.veryreader.d2p.api.security;
 
+import cn.hutool.json.JSONUtil;
+import com.veryreader.d2p.api.model.vo.Ret;
 import com.veryreader.d2p.api.security.config.SecurityPropertiesConfig;
 import com.veryreader.d2p.api.security.vo.LoginUser;
 import io.jsonwebtoken.Claims;
@@ -47,7 +49,10 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             UsernamePasswordAuthenticationToken authentication = getAuthentication(tokenHeader);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }catch (Exception e){
-            throw new BadCredentialsException("token无效",e);
+            // token校验失败
+            logger.error("token 校验失败");
+//            response.setCharacterEncoding("UTF-8");
+//            response.setStatus(401);
         }
 
         super.doFilterInternal(request, response, chain);
