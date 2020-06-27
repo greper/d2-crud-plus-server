@@ -1,0 +1,2 @@
+UPDATE `pm_resource` SET `id`='1', `platform_id`='1', `name`='system', `title`='系统管理', `permission`=NULL, `path`='/system', `component`='layoutHeaderAside', `icon`=NULL, `sort`='-10001', `type`='1', `parent_id`=NULL, `del_flag`='0', `create_time`=NULL, `update_time`=NULL WHERE (`id`='1');
+UPDATE `pm_resource` SET `id`='2', `platform_id`='1', `name`='header', `title`='顶部菜单', `permission`=NULL, `path`=NULL, `component`=NULL, `icon`=NULL, `sort`='-10000', `type`='1', `parent_id`=NULL, `del_flag`='1', `create_time`=NULL, `update_time`=NULL WHERE (`id`='2');
