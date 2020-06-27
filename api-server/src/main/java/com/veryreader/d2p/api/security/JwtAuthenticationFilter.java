@@ -51,8 +51,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         }catch (Exception e){
             // token校验失败
             logger.error("token 校验失败");
-//            response.setCharacterEncoding("UTF-8");
-//            response.setStatus(401);
         }
 
         super.doFilterInternal(request, response, chain);
