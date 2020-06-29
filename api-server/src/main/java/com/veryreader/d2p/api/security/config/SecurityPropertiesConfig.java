@@ -13,7 +13,10 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 public class SecurityPropertiesConfig {
-    private String tokenHeader = "authorization";
+
+    private String tokenParam = "token"; //从参数中获取token的参数名
+
+    private String tokenHeader = "authorization"; //从header里获取token的参数名
     private String tokenPrefix = "Bearer ";
 
 

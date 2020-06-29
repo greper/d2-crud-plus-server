@@ -38,15 +38,21 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
 
-        String tokenHeader = request.getHeader(config.getTokenHeader());
+        String token = request.getHeader(config.getTokenHeader());
+        if(token == null){
+            token = request.getParameter(config.getTokenParam());
+        }
         // 如果请求头中没有Authorization信息则直接放行了
-        if (tokenHeader == null || !tokenHeader.startsWith(config.getTokenPrefix())) {
+        if (token == null) {
             chain.doFilter(request,response);
             return;
         }
+
+        token = token.replace(config.getTokenPrefix(), "");
+
         // 如果请求头中有token，则进行解析，并且设置认证信息
         try {
-            UsernamePasswordAuthenticationToken authentication = getAuthentication(tokenHeader);
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }catch (Exception e){
             // token校验失败
@@ -57,8 +63,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
     }
 
     // 这里从token中获取用户信息并新建一个token
-    private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader) {
-        String token = tokenHeader.replace(config.getTokenPrefix(), "");
+    private UsernamePasswordAuthenticationToken getAuthentication(String token) {
         Claims body = JwtTokenUtil.getTokenBody(token,config.getJwtSecret());
         String username = body.getSubject();
         Long id = Long.parseLong( body.get("id").toString());

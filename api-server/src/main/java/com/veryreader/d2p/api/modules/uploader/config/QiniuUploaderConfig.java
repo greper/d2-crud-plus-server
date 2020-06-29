@@ -16,4 +16,5 @@ public class QiniuUploaderConfig {
     String accessKey = "access key";
     String secretKey = "secret key";
     String bucket = "bucket name";
+    String domain="http://d2p.file.veryreader.com";
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -105,5 +106,24 @@ public class CosController {
         return Ret.success("", map );
     }
 
+
+    /**
+     * 跳转到已签名下载地址
+     *
+     * @return
+     */
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public void download(HttpServletResponse response, @RequestParam String key,@RequestParam(value = "bucket",required = false) String bucket) throws IOException {
+        // 设置签名过期时间(可选), 若未进行设置, 则默认使用 ClientConfig 中的签名过期时间(5分钟)
+        long expire = System.currentTimeMillis() +DEFAULT_EXPIRE_TIME;
+        Date expirationTime = new Date( expire);
+        if(bucket == null){
+            bucket = cosConfig.getBucket();
+        }
+        URL url = cosClient.generatePresignedUrl(bucket, key, expirationTime, HttpMethodName.GET);
+        String downloadUrl = url.toString().replace("http://", "https://");
+        response.sendRedirect(downloadUrl);
+        response.setDateHeader("expries",expire);
+    }
 
 }

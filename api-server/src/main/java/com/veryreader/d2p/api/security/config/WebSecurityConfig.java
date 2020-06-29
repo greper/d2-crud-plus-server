@@ -82,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources",
                         "/swagger-resources/configuration/security",
                         "/swagger-ui.html",
-                        "/upload/**",
+                        "/upload/**", // 正式环境请删除此条，避免风险
                         "/error/**",
                         "/ueditor/**",
                         "/index.html"
