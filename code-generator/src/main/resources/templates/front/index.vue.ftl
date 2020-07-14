@@ -1,8 +1,7 @@
 <template>
-    <d2-container>
+    <d2-container :class="{'page-compact':crud.pageOptions.compact}">
         <template slot="header">${table.comment}</template>
-        <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch" class="d2-mb-10" ></crud-search>
-        <d2-crud
+        <d2-crud-x
                 ref="d2Crud"
                 :columns="crud.columns"
                 :data="crud.list"
@@ -14,21 +13,25 @@
                 :edit-rules="crud.editRules"
                 :form-options="crud.formOptions"
                 :options="crud.options"
+                :pagination="crud.pagination"
+                @pagination-change="handlePaginationChange"
                 @dialog-open="handleDialogOpen"
                 @row-edit="handleRowEdit"
                 @row-add="handleRowAdd"
                 @row-remove="handleRowRemove"
                 @dialog-cancel="handleDialogCancel"
                 @form-data-change="handleFormDataChange">
-            <el-button slot="header" class="d2-mb-5" style="margin-bottom: 5px" size="small" type="primary" @click="addRow">新增</el-button>
-        </d2-crud>
-        <crud-footer ref="footer" slot="footer"
-                     :current="crud.page.current"
-                     :size="crud.page.size"
-                     :total="crud.page.total"
-                     @change="handlePaginationChange"
-        >
-        </crud-footer>
+
+            <div slot="header">
+                <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch"  />
+                <el-button size="small" type="primary" @click="addRow"><i class="el-icon-plus"/> 新增</el-button>
+                <crud-toolbar :search.sync="crud.searchOptions.show"
+                              :compact.sync="crud.pageOptions.compact"
+                              :columns="crud.columns"
+                              @refresh="doRefresh()"
+                              @columns-filter-changed="handleColumnsFilterChanged"/>
+            </div>
+        </d2-crud-x>
     </d2-container>
 </template>
 
@@ -44,7 +47,7 @@
     },
     methods: {
       getCrudOptions () {
-        return crudOptions
+        return crudOptions(this)
       },
       pageRequest (query) {
         return GetList(query)

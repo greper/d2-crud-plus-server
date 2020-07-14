@@ -1,4 +1,4 @@
-import request from '@/plugin/axios'
+import request from '@/business/api/request.mock'
 const apiPrefix = '${cfg.apiUrlPrefix}/${package.ModuleName}/manager/${table.entityPath}'
 export function GetList (query) {
   return request({
