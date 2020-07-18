@@ -78,6 +78,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User query = new User();
         query.setUsername(username);
         User user = baseMapper.selectOne(Wrappers.lambdaQuery(query));
+        if(user == null){
+            return null;
+        }
         if(withRoles){
             List<Long> roleIds = getUserRoleIds(user.getId());
             user.setRoles(roleIds);

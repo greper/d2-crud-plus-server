@@ -39,3 +39,11 @@ export function GetObj (id) {
     params: { id }
   })
 }
+
+export function BatchDel (ids) {
+  return request({
+    url: apiPrefix +'/batchDelete',
+    method: 'post',
+    data: { ids }
+  })
+}

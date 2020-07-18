@@ -16,12 +16,12 @@ class CodeGeneratorApplicationTests {
     @Test
     void pm() {
         GenerateRequest request = GenerateRequest.builder()
-                .moduleName("permission")
-                .tableName("pm_user_role")
-                .parentPackage("com.veryreader.d2p.api.modules")
-                .tablePrefix("pm")
+                .moduleName("permission") //模块名
+                .tableName("pm_user_role")//表名
+                .parentPackage("com.veryreader.d2p.api.modules") //父包名
+                .tablePrefix("pm") //表前缀，生成的类名会去掉前缀
                 .apiUrlPrefix("")
-                .logicDeleteField("del_flag")
+                .logicDeleteField("del_flag") //逻辑删除字段
                 .build();
         request.addFill("createTime", FieldFill.INSERT);
         request.addFill("updateTime",FieldFill.INSERT_UPDATE);

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
+import com.veryreader.d2p.api.modules.base.vo.IdsRequestVO;
 import com.veryreader.d2p.api.modules.permission.entity.Platform;
 import com.veryreader.d2p.api.modules.permission.service.PlatformService;
 import lombok.AllArgsConstructor;
@@ -103,6 +104,17 @@ public class PlatformController {
         return Ret.success("", platformService.removeById(id));
     }
 
+    /**
+     * 批量删除
+     *
+     * @param body ids
+     * @return Ret
+     */
+    @PostMapping("/batchDelete")
+    @PreAuthorize("@pms.hasPermission('permission:platform:del')")
+    public Ret removeById(@RequestBody IdsRequestVO body) {
+        return Ret.success("", platformService.removeByIds(body.getIds()));
+    }
 }
 
 

@@ -1,5 +1,18 @@
 export const crudOptions =  = (vm) => {
 return {
+  rowHandle: {
+    edit: {
+        disabled: () => {
+            return !vm.hasPermissions('${package.ModuleName}:${table.entityPath}:edit')
+        }
+    },
+    remove: {
+        disabled: () => {
+            return !vm.hasPermissions('${package.ModuleName}:${table.entityPath}:del')
+        }
+    },
+    fixed: 'right'
+  },
   columns: [
     <#-- ----------  BEGIN 字段循环遍历  ---------->
     <#list table.fields as field>

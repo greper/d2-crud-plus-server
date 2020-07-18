@@ -1,6 +1,6 @@
 package ${package.Controller};
 
-
+import com.veryreader.d2p.api.modules.base.vo.IdsRequestVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -106,7 +106,19 @@ public class ${table.controllerName} {
  @PostMapping("/delete")
  @PreAuthorize("@pms.hasPermission('${package.ModuleName}:${table.entityPath}:del')")
  public Ret removeById(@RequestParam Long id) {
- return Ret.success("",${table.entityPath}Service.removeById(id));
+  return Ret.success("",${table.entityPath}Service.removeById(id));
+ }
+
+
+ /**
+ * 批量删除${table.comment!}
+ * @param body ids
+ * @return Ret
+ */
+ @PostMapping("/batchDelete")
+ @PreAuthorize("@pms.hasPermission('${package.ModuleName}:${table.entityPath}:del')")
+ public Ret removeByIds(@RequestBody IdsRequestVO body) {
+  return Ret.success("",${table.entityPath}Service.removeByIds(body.getIds()));
  }
 
 }
