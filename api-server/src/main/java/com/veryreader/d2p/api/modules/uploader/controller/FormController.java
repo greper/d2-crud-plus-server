@@ -77,12 +77,30 @@ public class FormController {
      */
     @RequestMapping(value="/upload",method = RequestMethod.POST)
     @ResponseBody
-    public Ret<String> upload(HttpServletRequest request,HttpServletResponse response,@RequestParam(value="file", required=false) MultipartFile file) throws IOException {
+    public Ret<String> upload(HttpServletRequest request,@RequestParam(value="file", required=false) MultipartFile file,
+            @RequestParam("key") String key) throws IOException {
         if (file.isEmpty()) {
             return Ret.error("上传失败，请选择文件",null);
         }
 
-        String oname = file.getOriginalFilename();
+
+        if(key == null){
+            String oname = file.getOriginalFilename();
+            key = buildKey(oname);
+        }
+        String dir = key.substring(0,key.lastIndexOf("/"));
+        File dirFile = new File(FILE_DIR+dir);
+        if(!dirFile.exists()){
+            boolean mkdirs = dirFile.mkdirs();
+        }
+        String fileDiskPath =  FILE_DIR + key;
+
+        File dest = new File(fileDiskPath);
+        file.transferTo(dest);
+        return  Ret.success("",urlPrefix+"/upload/form/download?key="+key);
+    }
+
+    private String buildKey(String oname) {
         String ext = "";
         if(StringUtils.isNotBlank(oname)&& oname.lastIndexOf(".")>=0){
             ext = oname.substring(oname.lastIndexOf("."));
@@ -91,17 +109,8 @@ public class FormController {
 
         String dir = "/"+ DateUtil.format(new Date(),"yyyy-MM-dd");
         String key = dir + "/"+fileName+ext;
-        File dirFile = new File(FILE_DIR+dir);
-        if(!dirFile.exists()){
-            boolean mkdirs = dirFile.mkdirs();
-        }
-        String fileDiskPath =  FILE_DIR + key;
-        File dest = new File(fileDiskPath);
-        file.transferTo(dest);
-        return  Ret.success("",urlPrefix+"/upload/form/download?key="+key);
+        return key;
     }
-
-
 
 
 }
