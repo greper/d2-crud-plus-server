@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 
 /**
- * 解析body，过滤id为10以下的
+ * 解析body，过滤id为1000以下的
  */
 public class RequestWrapper extends HttpServletRequestWrapper {
     private final String body;

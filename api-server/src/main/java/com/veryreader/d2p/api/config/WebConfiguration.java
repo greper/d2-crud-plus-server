@@ -1,5 +1,6 @@
 package com.veryreader.d2p.api.config;
 
+import com.veryreader.d2p.api.web.interceptor.CORSInterceptor;
 import com.veryreader.d2p.api.web.interceptor.DemoInterceptor;
 import com.veryreader.d2p.api.web.interceptor.GlobalExceptionResolver;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,8 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private DemoInterceptor demoInterceptor;
+    @Autowired
+    private CORSInterceptor corsInterceptor;
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
@@ -32,6 +35,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(demoInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(corsInterceptor).addPathPatterns("/**");
     }
 
     @Override
