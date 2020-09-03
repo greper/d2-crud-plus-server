@@ -1,4 +1,4 @@
-export const crudOptions =  = (vm) => {
+export const crudOptions = (vm) => {
 return {
   rowHandle: {
     edit: {
