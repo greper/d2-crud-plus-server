@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
+import com.veryreader.d2p.api.modules.base.controller.AbstractCrudController;
 import com.veryreader.d2p.api.modules.base.vo.IdsRequestVO;
 import com.veryreader.d2p.api.modules.permission.entity.Platform;
 import com.veryreader.d2p.api.modules.permission.service.PlatformService;
+import com.veryreader.d2p.api.modules.usersphere.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/permission/manager/platform")
-public class PlatformController {
+public class PlatformController extends AbstractCrudController<Platform> {
     private final PlatformService platformService;
 
     /**
@@ -37,7 +39,7 @@ public class PlatformController {
             , @RequestParam(value = "dateRange", required = false) String dateRange
     ) {
 
-        // setDefaultSort(page, "create_time", true);
+         setDefaultSort(page, "create_time", false);
 
         LambdaQueryWrapper<Platform> wrapper = Wrappers.lambdaQuery(query);
         // betweenDateRange(wrapper, Platform::getCreateTime, dateRange);
