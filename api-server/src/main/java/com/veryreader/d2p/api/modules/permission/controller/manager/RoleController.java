@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/permission/manager/role")
-public class RoleController  extends AbstractCrudController<Role> {
+public class RoleController  extends AbstractCrudController {
     private final RoleService roleService;
     private final RoleResourceService roleResourceService;
 

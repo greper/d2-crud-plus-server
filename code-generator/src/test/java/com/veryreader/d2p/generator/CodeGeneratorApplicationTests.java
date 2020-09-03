@@ -22,6 +22,7 @@ class CodeGeneratorApplicationTests {
                 .tablePrefix("pm") //表前缀，生成的类名会去掉前缀
                 .apiUrlPrefix("")
                 .logicDeleteField("del_flag") //逻辑删除字段
+                .superControllerClass("com.veryreader.d2p.api.modules.base.controller.AbstractCrudController")
                 .build();
         request.addFill("create_time", FieldFill.INSERT);
         request.addFill("update_time",FieldFill.INSERT_UPDATE);
@@ -45,6 +46,7 @@ class CodeGeneratorApplicationTests {
                 .tablePrefix("sys")
                 .apiUrlPrefix("")
                 .logicDeleteField("del_flag")
+                .superControllerClass("com.veryreader.d2p.api.modules.base.controller.AbstractCrudController")
                 .build();
         request.addFill("create_time", FieldFill.INSERT);
         request.addFill("update_time",FieldFill.INSERT_UPDATE);

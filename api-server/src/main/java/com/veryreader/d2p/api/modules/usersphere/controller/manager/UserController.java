@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/usersphere/manager/user")
 @AllArgsConstructor
-public class UserController extends AbstractCrudController<User> {
+public class UserController extends AbstractCrudController {
 
     private final UserService userService;
     private final RoleService roleService;

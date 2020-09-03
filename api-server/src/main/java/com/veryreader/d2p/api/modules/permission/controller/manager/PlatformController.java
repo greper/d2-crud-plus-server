@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/permission/manager/platform")
-public class PlatformController extends AbstractCrudController<Platform> {
+public class PlatformController extends AbstractCrudController {
     private final PlatformService platformService;
 
     /**

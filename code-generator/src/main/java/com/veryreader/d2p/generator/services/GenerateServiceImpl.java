@@ -135,6 +135,7 @@ public class GenerateServiceImpl implements GenerateService {
         //strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
+        strategy.setSuperControllerClass(request.getSuperControllerClass());
         strategy.setLogicDeleteFieldName(request.getLogicDeleteField());
         // 公共父类
        // strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");

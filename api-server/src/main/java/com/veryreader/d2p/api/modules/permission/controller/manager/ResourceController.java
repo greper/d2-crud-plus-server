@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/permission/manager/resource")
-public class ResourceController extends AbstractCrudController<Resource> {
+public class ResourceController extends AbstractCrudController {
     private final ResourceService resourceService;
 
     /**

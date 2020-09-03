@@ -26,7 +26,8 @@ public class GenerateRequest {
     private String moduleName;
     private String tablePrefix;
     private String apiUrlPrefix;
-    private String logicDeleteField = "del_flag";
+    private String logicDeleteField;
+    private String superControllerClass;
     private List<TableFill> fillList;
 
     public  GenerateRequest addFill(String fieldName, FieldFill fieldFill){

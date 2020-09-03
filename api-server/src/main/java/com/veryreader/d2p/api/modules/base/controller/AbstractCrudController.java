@@ -14,7 +14,7 @@ import java.util.Date;
  * @Author: xiaojunnuo
  * @CreateDate: 2018/12/29 0029$
  */
-public class AbstractCrudController<T> {
+public class AbstractCrudController {
     public void setDefaultSort(Page page, String sortProp, boolean isDesc) {
         if(page!= null && page.getOrders()!= null && page.getOrders().size()>0){
            return;
@@ -26,7 +26,7 @@ public class AbstractCrudController<T> {
         }
     }
 
-    public void betweenDateRange( LambdaQueryWrapper<T> wrapper, SFunction<T, Object> column,String dateRange) {
+    public void betweenDateRange( LambdaQueryWrapper wrapper, SFunction column,String dateRange) {
         if(StringUtils.isNotBlank(dateRange)){
             String[] range = dateRange.split("-");
             wrapper.between(column, new Date(Long.parseLong(range[0])), new Date(Long.parseLong(range[1])));
