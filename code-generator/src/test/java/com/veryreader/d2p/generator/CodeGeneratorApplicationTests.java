@@ -23,8 +23,8 @@ class CodeGeneratorApplicationTests {
                 .apiUrlPrefix("")
                 .logicDeleteField("del_flag") //逻辑删除字段
                 .build();
-        request.addFill("createTime", FieldFill.INSERT);
-        request.addFill("updateTime",FieldFill.INSERT_UPDATE);
+        request.addFill("create_time", FieldFill.INSERT);
+        request.addFill("update_time",FieldFill.INSERT_UPDATE);
         generateService.generate(request);
         request.setTableName("pm_role");
         generateService.generate(request);
@@ -46,8 +46,8 @@ class CodeGeneratorApplicationTests {
                 .apiUrlPrefix("")
                 .logicDeleteField("del_flag")
                 .build();
-        request.addFill("createTime", FieldFill.INSERT);
-        request.addFill("updateTime",FieldFill.INSERT_UPDATE);
+        request.addFill("create_time", FieldFill.INSERT);
+        request.addFill("update_time",FieldFill.INSERT_UPDATE);
         generateService.generate(request);
     }
 }
