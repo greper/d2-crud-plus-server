@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
+import com.veryreader.d2p.api.modules.base.controller.AbstractCrudController;
+import com.veryreader.d2p.api.modules.permission.entity.Platform;
 import com.veryreader.d2p.api.modules.permission.entity.Resource;
 import com.veryreader.d2p.api.modules.permission.service.ResourceService;
 import lombok.AllArgsConstructor;
@@ -25,7 +27,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/permission/manager/resource")
-public class ResourceController {
+public class ResourceController extends AbstractCrudController {
     private final ResourceService resourceService;
 
     /**
@@ -39,7 +41,7 @@ public class ResourceController {
             , @RequestParam(value = "dateRange", required = false) String dateRange
     ) {
 
-        // setDefaultSort(page, "create_time", true);
+        setDefaultSort(page, "create_time", false);
 
         LambdaQueryWrapper<Resource> wrapper = Wrappers.lambdaQuery(query);
         // betweenDateRange(wrapper, Resource::getCreateTime, dateRange);
