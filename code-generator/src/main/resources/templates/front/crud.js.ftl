@@ -1,6 +1,11 @@
 export const crudOptions = (vm) => {
 return {
   rowHandle: {
+    view: {
+        disabled: () => {
+            return !vm.hasPermissions('${package.ModuleName}:${table.entityPath}:edit')
+        }
+    },
     edit: {
         disabled: () => {
             return !vm.hasPermissions('${package.ModuleName}:${table.entityPath}:edit')
