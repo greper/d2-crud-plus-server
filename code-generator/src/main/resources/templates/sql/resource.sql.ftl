@@ -1,7 +1,7 @@
 -- 模块菜单
 INSERT INTO `pm_resource` (`name`, `title`, `permission`, `path`, `component`, `icon`, `sort`, `type`, `parent_id`, `del_flag`, `create_time`, `update_time`)
 SELECT  '${package.ModuleName}', '${package.ModuleName}', null, null, null, null, '100', '1', '1', '0', '${cfg.now}', '${cfg.now}'
-FROM DUAL WHERE NOT EXISTS(SELECT id FROM pm_resource WHERE name = 'permission');
+FROM DUAL WHERE NOT EXISTS(SELECT id FROM pm_resource WHERE name = '${package.ModuleName}');
 
 -- 查找模块菜单id
 set @parentId = (select id from pm_resource where  name = '${package.ModuleName}');
