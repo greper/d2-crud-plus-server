@@ -1,4 +1,4 @@
-import request from '@/api/service'
+import { request } from '@/api/service'
 const apiPrefix = '${cfg.apiUrlPrefix}/${package.ModuleName}/manager/${table.entityPath}'
 export function GetList (query) {
   return request({

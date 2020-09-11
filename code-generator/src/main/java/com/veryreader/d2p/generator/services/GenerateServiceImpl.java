@@ -120,7 +120,7 @@ public class GenerateServiceImpl implements GenerateService {
                     if(key.endsWith("sql.ftl")){
                        dir = "/sql";
                     }
-                    return finalRootDir + dir+"/"+request.getModuleName()+"/"+ tableInfo.getEntityPath() + value;
+                    return finalRootDir + dir+"/"+request.getModuleName()+"/views/"+ tableInfo.getEntityPath() + value;
                 }
             });
         }
