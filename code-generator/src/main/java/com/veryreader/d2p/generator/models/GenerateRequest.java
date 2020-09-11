@@ -29,6 +29,7 @@ public class GenerateRequest {
     private String logicDeleteField;
     private String superControllerClass;
     private List<TableFill> fillList;
+    private Long platformId;
 
     public  GenerateRequest addFill(String fieldName, FieldFill fieldFill){
         if(fillList == null){

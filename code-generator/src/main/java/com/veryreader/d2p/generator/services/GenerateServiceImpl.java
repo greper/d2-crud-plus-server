@@ -91,6 +91,7 @@ public class GenerateServiceImpl implements GenerateService {
             public void initMap() {
                 Map<String, Object> map = new HashMap<>();
                 map.put("apiUrlPrefix", request.getApiUrlPrefix());
+                map.put("platformId", request.getPlatformId());
                 map.put("now", DateUtil.format(new Date(),"yyyy-MM-dd HH:mm:ss"));
                 this.setMap(map);
             }

@@ -21,6 +21,7 @@ class CodeGeneratorApplicationTests {
                 .parentPackage("com.veryreader.d2p.api.modules") //父包名
                 .tablePrefix("pm") //表前缀，生成的类名会去掉前缀
                 .apiUrlPrefix("")
+                .platformId(1L)
                 .logicDeleteField("del_flag") //逻辑删除字段
                 .superControllerClass("com.veryreader.d2p.api.modules.base.controller.AbstractCrudController")
                 .build();
