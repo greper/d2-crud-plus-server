@@ -13,6 +13,9 @@ return {
     },
     fixed: 'right'
   },
+  options:{
+    height: '100%'
+  },
   columns: [
     <#-- ----------  BEGIN 字段循环遍历  ---------->
     <#list table.fields as field>
