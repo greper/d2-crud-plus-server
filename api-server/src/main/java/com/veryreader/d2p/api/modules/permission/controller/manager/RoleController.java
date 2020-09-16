@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
 import com.veryreader.d2p.api.modules.base.controller.AbstractCrudController;
-import com.veryreader.d2p.api.modules.permission.entity.Platform;
 import com.veryreader.d2p.api.modules.permission.entity.Role;
 import com.veryreader.d2p.api.modules.permission.service.RoleResourceService;
 import com.veryreader.d2p.api.modules.permission.service.RoleService;
@@ -42,12 +41,10 @@ public class RoleController  extends AbstractCrudController {
             , @RequestParam(value = "dateRange", required = false) String dateRange
     ) {
 
-        setDefaultSort(page, "create_time", false);
+        setDefaultSort(page, "id", false);
+        // setDefaultSort(page, "create_time", true); //实际项目中可以配置为按添加时间倒序排序
 
         LambdaQueryWrapper<Role> wrapper = Wrappers.lambdaQuery(query);
-        // betweenDateRange(wrapper, Role::getCreateTime, dateRange);
-        // wrapper.eq(Role::getDelFlag, '0');
-
 
         return Ret.success("", roleService.page(page, wrapper));
     }

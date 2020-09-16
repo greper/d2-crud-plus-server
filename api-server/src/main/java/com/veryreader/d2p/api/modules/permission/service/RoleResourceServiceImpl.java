@@ -22,18 +22,16 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void authz(Long roleId, Long platformId, List<Long> resourceIds) {
+    public void authz(Long roleId,  List<Long> resourceIds) {
         //先删除roleId所有的权限
         RoleResource query = new RoleResource();
         query.setRoleId(roleId);
-        query.setPlatformId(platformId);
         baseMapper.delete(Wrappers.lambdaQuery(query));
         // 然后再添加
         for (Long resourceId : resourceIds) {
             RoleResource add = new RoleResource();
             add.setRoleId(roleId);
             add.setResourceId(resourceId);
-            add.setPlatformId(platformId);
             baseMapper.insert(add);
         }
     }

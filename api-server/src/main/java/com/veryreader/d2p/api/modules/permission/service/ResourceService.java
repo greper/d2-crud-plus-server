@@ -17,7 +17,7 @@ public interface ResourceService extends IService<Resource> {
 
     List<Resource> findResourceTree(Resource query);
 
-    List<Resource> findResourceTreeByRoleIds(List<Long> roleIds, Long platformId);
+    List<Resource> findResourceTreeByRoleIds(List<Long> roleIds);
     void clearPermissionCache();
-    public List<String> findPermissionByRoleIds(List<Long> roleIds, Long platformId);
+    public List<String> findPermissionByRoleIds(List<Long> roleIds);
 }

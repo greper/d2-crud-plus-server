@@ -34,7 +34,6 @@ public class Resource implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Long platformId;
 
     /**
      * 菜单名称

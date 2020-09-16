@@ -6,20 +6,16 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
 import com.veryreader.d2p.api.modules.base.controller.AbstractCrudController;
-import com.veryreader.d2p.api.modules.permission.entity.Platform;
 import com.veryreader.d2p.api.modules.permission.entity.Role;
 import com.veryreader.d2p.api.modules.permission.entity.UserRole;
-import com.veryreader.d2p.api.modules.permission.service.PlatformService;
 import com.veryreader.d2p.api.modules.permission.service.RoleService;
 import com.veryreader.d2p.api.modules.permission.service.UserRoleService;
 import com.veryreader.d2p.api.modules.usersphere.entity.User;
 import com.veryreader.d2p.api.modules.usersphere.service.UserService;
-import com.veryreader.d2p.api.modules.usersphere.vo.RoleGroup;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,7 +36,6 @@ public class UserController extends AbstractCrudController {
     private final UserService userService;
     private final RoleService roleService;
     private final UserRoleService userRoleService;
-    private final PlatformService platformService;
 
     /**
      * 分页查询
@@ -53,7 +48,8 @@ public class UserController extends AbstractCrudController {
             , @RequestParam(value = "dateRange", required = false) String dateRange
     ) {
 
-        setDefaultSort(page, "create_time", false);
+        setDefaultSort(page, "id", false);
+        // setDefaultSort(page, "create_time", true); //实际项目中可以配置为按添加时间倒序排序
 
         LambdaQueryWrapper<User> wrapper = Wrappers.lambdaQuery(query);
         // betweenDateRange(wrapper, User::getCreateTime, dateRange);
@@ -131,21 +127,8 @@ public class UserController extends AbstractCrudController {
      */
     @GetMapping("/getAllRole")
     public Ret getAllRole() {
-        List<Platform> platforms = platformService.list();
-        final List<RoleGroup> groupList = new ArrayList<>(platforms.size());
-        Map<Long, RoleGroup> groupMap = platforms.stream().collect(Collectors.toMap(Platform::getId,item->{
-            RoleGroup roleGroup = new RoleGroup(item);
-            groupList.add(roleGroup);
-            return roleGroup;
-        }));
         List<Role> roleList = roleService.getRoleList();
-        for (Role role : roleList) {
-            RoleGroup roleGroup = groupMap.get(role.getPlatformId());
-            if(roleGroup!= null){
-                roleGroup.addRole(role);
-            }
-        }
-        return Ret.success("", groupList);
+        return Ret.success("", roleList);
     }
 
     /**

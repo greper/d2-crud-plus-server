@@ -2,12 +2,10 @@ package com.veryreader.d2p.api.modules.permission.controller.manager;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
 import com.veryreader.d2p.api.modules.base.controller.AbstractCrudController;
-import com.veryreader.d2p.api.modules.permission.entity.Platform;
 import com.veryreader.d2p.api.modules.permission.entity.Resource;
 import com.veryreader.d2p.api.modules.permission.service.ResourceService;
 import lombok.AllArgsConstructor;
@@ -41,11 +39,10 @@ public class ResourceController extends AbstractCrudController {
             , @RequestParam(value = "dateRange", required = false) String dateRange
     ) {
 
-        setDefaultSort(page, "create_time", false);
+        setDefaultSort(page, "id", false);
+        // setDefaultSort(page, "create_time", true); //实际项目中可以配置为按添加时间倒序排序
 
         LambdaQueryWrapper<Resource> wrapper = Wrappers.lambdaQuery(query);
-        // betweenDateRange(wrapper, Resource::getCreateTime, dateRange);
-        // wrapper.eq(Resource::getDelFlag, '0');
 
         return Ret.success("", resourceService.page(page, wrapper));
     }

@@ -29,7 +29,6 @@ public class RoleResource implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Long platformId;
 
     private Long roleId;
 

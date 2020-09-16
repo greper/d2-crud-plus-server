@@ -32,7 +32,6 @@ public class Role implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Long platformId;
 
     /**
      * 角色名称
