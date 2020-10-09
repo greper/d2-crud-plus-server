@@ -9,11 +9,7 @@
             <div slot="header">
                 <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch"  />
                 <el-button v-permission="'${package.ModuleName}:${table.entityPath}:add'" size="small" type="primary" @click="addRow"><i class="el-icon-plus"/> 新增</el-button>
-                <crud-toolbar :search.sync="crud.searchOptions.show"
-                              :compact.sync="crud.pageOptions.compact"
-                              :columns="crud.columns"
-                              @refresh="doRefresh()"
-                              @columns-filter-changed="handleColumnsFilterChanged"/>
+                <crud-toolbar v-bind="_crudToolbarProps" v-on="_crudToolbarListeners"/>
             </div>
             <span slot="PaginationPrefixSlot" class="prefix" >
                 <el-button v-permission="'${package.ModuleName}:${table.entityPath}:del'" class="square" size="mini" title="批量删除"   @click="batchDelete" icon="el-icon-delete" :disabled="!multipleSelection || multipleSelection.length===0"  />
