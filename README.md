@@ -4,3 +4,5 @@ d2-crud-plus是基于前端框架d2-admin 的 d2-crud 的扩展,简化d2-crud配
 github: https://github.com/greper/d2-crud-plus.git
 
 本项目为d2-curd-plus-example所需要的的后端示例
+
+[详细使用请看文档](http://greper.gitee.io/d2-crud-plus/guide/permission.html#权限管理)
