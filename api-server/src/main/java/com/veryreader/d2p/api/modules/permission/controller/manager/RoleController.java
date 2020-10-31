@@ -2,6 +2,7 @@ package com.veryreader.d2p.api.modules.permission.controller.manager;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.veryreader.d2p.api.model.vo.Ret;
@@ -38,8 +39,14 @@ public class RoleController  extends AbstractCrudController {
      */
     @GetMapping("/page")
     public Ret getRolePage(Page page, Role query
+            , @RequestParam(value = "orderColumn", required = false) String orderColumn
+            , @RequestParam(value = "orderAsc", required = false) Boolean orderAsc
             , @RequestParam(value = "dateRange", required = false) String dateRange
     ) {
+
+        if(orderAsc!= null){
+            page.addOrder(orderAsc?OrderItem.asc(orderColumn):OrderItem.desc(orderColumn));
+        }
 
         setDefaultSort(page, "id", false);
         // setDefaultSort(page, "create_time", true); //实际项目中可以配置为按添加时间倒序排序
