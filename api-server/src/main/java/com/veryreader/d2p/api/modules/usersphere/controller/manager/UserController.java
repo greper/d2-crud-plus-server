@@ -46,13 +46,13 @@ public class UserController extends AbstractCrudController {
      */
     @GetMapping("/page")
     public Ret getUserPage(Page<User> page, User query
-            , @RequestParam(value = "orderColumn", required = false) String orderColumn
+            , @RequestParam(value = "orderProp", required = false) String orderProp
             , @RequestParam(value = "orderAsc", required = false) Boolean orderAsc
             , @RequestParam(value = "dateRange", required = false) String dateRange
     ) {
 
         if(orderAsc!= null){
-            page.addOrder(orderAsc? OrderItem.asc(orderColumn):OrderItem.desc(orderColumn));
+            page.addOrder(orderAsc? OrderItem.asc(orderProp):OrderItem.desc(orderProp));
         }
 
         setDefaultSort(page, "id", false);
