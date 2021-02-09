@@ -25,7 +25,12 @@ spring:
   flyway:
     clean-disabled: false
     baselineOnMigrate: true
-
+cors:
+  mapping: '/**'
+  allowedOrigins:
+    - '*'
+  allowedMethods:
+    - '*'
 uploader:
   qiniu:
     accessKey: 你的七牛accessKey
