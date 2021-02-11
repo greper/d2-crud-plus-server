@@ -78,7 +78,7 @@ public class FormController {
     @RequestMapping(value="/upload",method = RequestMethod.POST)
     @ResponseBody
     public Ret<String> upload(HttpServletRequest request,@RequestParam(value="file", required=false) MultipartFile file,
-            @RequestParam("key") String key) throws IOException {
+            @RequestParam(value = "key",required = false) String key) throws IOException {
         if (file.isEmpty()) {
             return Ret.error("上传失败，请选择文件",null);
         }
