@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author auto generator
@@ -29,6 +29,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     private final UserRoleService userRoleService;
     private final PasswordEncoder passwordEncoder;
+
     @Override
     public List<Long> getUserRoleIds(Long userId) {
         return userRoleService.getRoleIdsByUserId(userId);
@@ -37,13 +38,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void authz(Long userId, List<Long> roleIds) {
-        userRoleService.authz(userId,roleIds);
+        userRoleService.authz(userId, roleIds);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void add(User user) {
-        if(StringUtils.isBlank(user.getPassword())){
+        //校验用户名是否重复
+        User oldUser = getByUsername(user.getUsername(), false);
+        if (oldUser != null) {
+            throw new RuntimeException("该用户已存在");
+        }
+
+        if (StringUtils.isBlank(user.getPassword())) {
             user.setPassword(RandomUtil.randomString(6));
         }
         generatePassword(user);
@@ -56,13 +63,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
 
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean update(User user) {
-        if(StringUtils.isNotBlank(user.getPassword())){
+        if (StringUtils.isNotBlank(user.getPassword())) {
             generatePassword(user);
-        }else{
+        } else {
             user.setPassword(null);
         }
         user.setUsername(null);//禁止修改用户名
@@ -72,16 +78,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User getByUsername(String username, boolean withRoles) {
-        if(StringUtils.isBlank(username)){
+        if (StringUtils.isBlank(username)) {
             return null;
         }
         User query = new User();
         query.setUsername(username);
         User user = baseMapper.selectOne(Wrappers.lambdaQuery(query));
-        if(user == null){
+        if (user == null) {
             return null;
         }
-        if(withRoles){
+        if (withRoles) {
             List<Long> roleIds = getUserRoleIds(user.getId());
             user.setRoles(roleIds);
 
@@ -92,7 +98,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public boolean verifyPassword(User user, String rawPassword) {
         String encodePassword = passwordEncoder.encode(rawPassword);
-        if(StringUtils.equals(encodePassword,user.getPassword())){
+        if (StringUtils.equals(encodePassword, user.getPassword())) {
             return true;
         }
         return false;
